@@ -1,0 +1,9 @@
+
+
+name = "link-shortener"
+main = "index.js"
+compatibility_date = "2024-04-03"
+
+[[kv_namespaces]]
+binding = "LINKS_DB"
+id = "90fcb069c77e4ed7a9b117d03b73cba2"
