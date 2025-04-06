@@ -1,66 +1,39 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import UrlInput from "./components/UrlInput";
+import UrlResult from "./components/UrlResult";
+import Instructions from "./components/Instructions";
 
 function App() {
-  const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
 
-  const handleShorten = async () => {
-    if (!url) return alert("Please enter a URL");
+  const handleShorten = async (longUrl) => {
+    console.log("Trying to shorten:", longUrl);
+    try {
+      const res = await fetch("https://link-shortener.dkg.workers.dev/shorten", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: longUrl }),
+      });
 
-    // Replace with your actual backend API
-    const response = await fetch("http://localhost:5000/api/shorten", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ longUrl: url }),
-    });
-
-    const data = await response.json();
-    setShortUrl(data.shortUrl);
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(shortUrl);
-    alert("Copied to clipboard!");
+      const data = await res.json();
+      console.log("Shortened data:", data);
+      if (data.shortUrl) setShortUrl(data.shortUrl);
+    } catch (error) {
+      console.error("Shorten failed", error);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 p-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 space-y-6">
+        <h1 className="text-4xl font-bold text-center text-gray-800">
           🔗 Link Shortener
         </h1>
-
-        <input
-          type="text"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Enter long URL"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-
-        <button
-          onClick={handleShorten}
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
-        >
-          Shorten
-        </button>
-
-        {shortUrl && (
-          <div className="mt-6">
-            <p className="text-gray-600 mb-2">Shortened URL:</p>
-            <div
-              className="text-indigo-700 font-medium break-words cursor-pointer underline hover:text-indigo-900"
-              onClick={handleCopy}
-            >
-              {shortUrl}
-            </div>
-          </div>
-        )}
-
-        <p className="mt-6 text-sm text-gray-500">
-          📌 Paste a long URL and click "Shorten" to get a short link. <br />
-          📎 Click the short link to copy it easily.
-        </p>
+        <UrlInput onShorten={handleShorten} />
+        <UrlResult shortUrl={shortUrl} />
+        <Instructions />
       </div>
     </div>
   );
