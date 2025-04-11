@@ -4,7 +4,7 @@ from ai_services.logger.log_writer import write_log
 from ai_services.recovery.recover import auto_recover
 
 app = Flask(__name__)
-detector = AnomalyDetector()  # <-- This was missing
+detector = AnomalyDetector()
 
 @app.route('/analyze', methods=['POST'])
 def analyze_traffic():
@@ -15,13 +15,14 @@ def analyze_traffic():
 
     print(f"[REQUEST] IP: {ip}, Short Code: {short_code}, Agent: {user_agent}")
 
-    # Step 1: Detect Anomaly
+    # Step 1: Detect anomaly
     is_anomalous = detector.detect(ip, user_agent)
 
-    # Step 2: Log every request
+    # Step 2: Log request
+    print("[main.py] Calling write_log...")
     write_log(ip, short_code, user_agent)
 
-    # Step 3: Auto-Recovery (block IPs if over limit)
+    # Step 3: Auto-recovery
     recovery_result = auto_recover(ip)
     if recovery_result["action"] == "blocked":
         print(f"[RECOVERY] IP {ip} has been blocked: {recovery_result['reason']}")

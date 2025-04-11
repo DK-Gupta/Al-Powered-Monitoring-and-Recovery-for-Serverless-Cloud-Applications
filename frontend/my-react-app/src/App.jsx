@@ -26,11 +26,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 space-y-6">
-        <h1 className="text-4xl font-bold text-center text-gray-800">
-          🔗 Link Shortener
-        </h1>
+    <div className="app-wrapper">
+      <div className="card">
+        <h1 className="title">🔗 Link Shortener</h1>
         <UrlInput onShorten={handleShorten} />
         <UrlResult shortUrl={shortUrl} />
         <Instructions />

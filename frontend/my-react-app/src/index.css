@@ -1,3 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ========== Global Reset ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* ========== Body Styling ========== */
+  /* === Full Page Background Image === */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('assets/image2.png') ;
+    background-size: cover;
+  }
+  
+  
+  /* ========== App Container ========== */
+  .app-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  
+  /* ========== Main Card ========== */
+  .card {
+    
+    width: 100%;
+    max-width: 720px;
+    background: linear-gradient(145deg, #6b73ff, #000dff);
+    border-radius: 24px;
+    padding: 2.5rem;
+    color: white;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* ========== Title ========== */
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+ /* ...previous styles remain the same... */
+
+/* ========== Input Field ========== */
+.url-input {
+    
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 9999px;
+    border: none;
+    outline: none;
+    margin: 1.2rem 0; /* Adds vertical space */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ========== Buttons ========== */
+  .shorten-btn,
+  .copy-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: #4f46e5;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Add spacing between each section */
+  .url-result {
+    margin-top: 2rem;
+  }
+  
+  .instructions {
+    margin-top: 2rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #e0e7ff;
+  }
+  
+  /* ========== Title ========== */
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  

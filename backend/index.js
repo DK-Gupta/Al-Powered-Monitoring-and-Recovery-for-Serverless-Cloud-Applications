@@ -3,7 +3,6 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.slice(1).trim();
 
-    // Handle preflight CORS request
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
@@ -27,7 +26,7 @@ export default {
           },
         });
       }
-      return await handleRedirect(path, request, env);  // Pass `request` here
+      return await handleRedirect(path, request, env);
     }
 
     return new Response(JSON.stringify({ error: "Not Found" }), {
@@ -40,7 +39,6 @@ export default {
   },
 };
 
-// Handle URL Shortening
 async function handleShorten(request, env) {
   try {
     const { url } = await request.json();
@@ -58,7 +56,7 @@ async function handleShorten(request, env) {
     await env.LINKS_DB.put(id, url);
 
     return new Response(
-      JSON.stringify({ shortUrl: `https://link-shortener.dkg.workers.dev/${id}` }),
+      JSON.stringify({ shortUrl: `http://localhost:8787/${id}` }),
       {
         status: 200,
         headers: {
@@ -78,7 +76,6 @@ async function handleShorten(request, env) {
   }
 }
 
-// Handle Redirect with AI integration and anomaly detection
 async function handleRedirect(id, request, env) {
   if (!id) {
     return new Response(JSON.stringify({ error: "Missing or invalid key" }), {
@@ -112,7 +109,7 @@ async function handleRedirect(id, request, env) {
   const userAgent = request.headers.get("User-Agent") || "unknown";
 
   try {
-    const aiRes = await fetch("http://localhost:5000/analyze", {
+    const aiRes = await fetch("http://127.0.0.1:5000/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -137,7 +134,6 @@ async function handleRedirect(id, request, env) {
       });
     }
   } catch (err) {
-    // Optionally log error or fallback
     console.error("AI Service error:", err.message);
   }
 

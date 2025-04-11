@@ -3,7 +3,7 @@ from ai_services.logger.log_writer import write_log as log_anomaly
 from ai_services.utils import block_ip
 
 # Define threshold
-MAX_REQUESTS_PER_MIN = 5  # Lowered for testing
+MAX_REQUESTS_PER_MIN = 3  # Lowered for testing
 
 # Store per-IP timestamps
 request_log = {}
