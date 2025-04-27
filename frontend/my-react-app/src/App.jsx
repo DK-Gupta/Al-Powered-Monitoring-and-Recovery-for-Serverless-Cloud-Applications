@@ -9,7 +9,7 @@ function App() {
   const handleShorten = async (longUrl) => {
     console.log("Trying to shorten:", longUrl);
     try {
-      const res = await fetch("https://link-shortener.dkg.workers.dev/shorten", {
+      const res = await fetch("http://localhost:8787/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import os
 
-# Safer absolute path
+# Safer absolute path.
 METRICS_FILE = os.path.join(os.path.dirname(__file__), 'metrics.json')
 
 
