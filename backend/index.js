@@ -109,7 +109,7 @@ async function handleRedirect(id, request, env) {
   const userAgent = request.headers.get("User-Agent") || "unknown";
 
   try {
-    const aiRes = await fetch("http://127.0.0.1:5000/analyze", {
+    const aiRes = await fetch("https://ai-services-6p0b.onrender.com/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
